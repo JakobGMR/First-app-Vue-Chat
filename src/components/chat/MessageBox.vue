@@ -38,7 +38,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-defineEmits<{
+const emit = defineEmits<{
   sendMessage: [text: string];
 }>();
 
@@ -48,6 +48,8 @@ const sendMessage = () => {
   if (!message.value.trim()) return;
 
   console.log(message.value);
+
+  emit('sendMessage', message.value);
 
   message.value = '';
 };
