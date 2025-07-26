@@ -15,12 +15,15 @@ const messages = ref<ChatMessage[]>([
     message: 'Si',
     itsMine: false,
   },
-  {
-    id: new Date().getTime() + 1,
-    message: 'Seguro?',
-    itsMine: true,
-  },
 ]);
+
+const onMessage = (message: string) => {
+  messages.value.push({
+    id: new Date().getTime() + 1,
+    message,
+    itsMine: true,
+  });
+};
 </script>
 
 <template>
@@ -31,6 +34,6 @@ const messages = ref<ChatMessage[]>([
 
     <ChatMessages :messages="messages" />
 
-    <MessageBox />
+    <MessageBox v-on:send-message="onMessage($event)" />
   </div>
 </template>
